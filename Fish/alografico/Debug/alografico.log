@@ -1,0 +1,8 @@
+﻿  Origem.cpp
+c:\users\usuário\downloads\alografico\alografico\origem.cpp(53): warning C4477: 'printf': a cadeia de formato '%.2f' requer um argumento do tipo 'double', mas um argumento variadic 1 tem o tipo 'int'
+c:\users\usuário\downloads\alografico\alografico\origem.cpp(53): warning C4477: 'printf': a cadeia de formato '%.2f' requer um argumento do tipo 'double', mas um argumento variadic 2 tem o tipo 'int'
+c:\users\usuário\downloads\alografico\alografico\origem.cpp(53): warning C4477: 'printf': a cadeia de formato '%.2f' requer um argumento do tipo 'double', mas um argumento variadic 3 tem o tipo 'int'
+c:\users\usuário\downloads\alografico\alografico\origem.cpp(53): warning C4477: 'printf': a cadeia de formato '%.2f' requer um argumento do tipo 'double', mas um argumento variadic 4 tem o tipo 'int'
+c:\users\usuário\downloads\alografico\alografico\origem.cpp(80): warning C4244: '=': conversão de 'double' para 'GLfloat', possível perda de dados
+c:\users\usuário\downloads\alografico\alografico\origem.cpp(81): warning C4244: 'argumento': conversão de 'double' para 'GLfloat', possível perda de dados
+  alografico.vcxproj -> C:\Users\Usuário\Downloads\alografico\Debug\alografico.exe
