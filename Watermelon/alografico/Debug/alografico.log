@@ -1,8 +1,0 @@
-﻿  Origem.cpp
-c:\users\usuário\desktop\ \alografico\alografico\origem.cpp(51): warning C4244: '=': conversão de 'double' para 'float', possível perda de dados
-c:\users\usuário\desktop\ \alografico\alografico\origem.cpp(55): warning C4244: '=': conversão de 'double' para 'float', possível perda de dados
-c:\users\usuário\desktop\ \alografico\alografico\origem.cpp(80): warning C4244: '=': conversão de 'double' para 'GLfloat', possível perda de dados
-c:\users\usuário\desktop\ \alografico\alografico\origem.cpp(81): warning C4244: 'argumento': conversão de 'double' para 'GLfloat', possível perda de dados
-c:\users\usuário\desktop\ \alografico\alografico\origem.cpp(89): warning C4244: '=': conversão de 'double' para 'GLfloat', possível perda de dados
-c:\users\usuário\desktop\ \alografico\alografico\origem.cpp(90): warning C4244: 'argumento': conversão de 'double' para 'GLfloat', possível perda de dados
-  alografico.vcxproj -> C:\Users\Usuário\Desktop\ \alografico\Debug\alografico.exe
