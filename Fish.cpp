@@ -1,90 +1,90 @@
-#include<GL/glew.h>
-#include<GL/glut.h>
-#include<math.h>
-#include<stdio.h>
-#include<stdlib.h>
+#include <stdio.h>
+#include <stdlib.h>
+#include <GL/glut.h>
+#include <math.h>
 
-#define windowH 400
-#define windowW 600
 #define PI 3.1415926535898
+#define janela_altura 500
+#define janela_largura 800
+GLfloat  circ_pnt = 500;
+GLfloat  ang, raioX = 200.0f, raioY = 200.0f;
 
-//translation variables
 float tx = 0.0;
 float ty = 0.0;
-
-//variables incrementation
-float xStep = 8;
+float xStep = 4;
 float yStep = 4;
+float x = 0;
+float r = 1;
+float g = 0.9;
+float b = 0;
 
+void anima(int valor);
 void display(void);
-void screen(GLsizei w, GLsizei h);
+void tela(GLsizei w, GLsizei h);
 void keyboard(unsigned char key, int x, int y);
-void anim(int value);
 
 int main(int argc, char** argv) {
+
 	glutInit(&argc, argv);
 	glutInitDisplayMode(GLUT_SINGLE | GLUT_RGB);
-	glutInitWindowSize(windowW, windowH);
-	glutInitWindowPosition(100, 100);
-	glutCreateWindow("Animation Test");
 
-	glutReshapeFunc(screen);
-	glutDisplayFunc(display);
+	glutInitWindowSize(janela_largura, janela_altura);
+	glutInitWindowPosition(0, 0);
+	glutCreateWindow("Aquário");
+	glutReshapeFunc(tela);
 	glutKeyboardFunc(&keyboard);
-	glutTimerFunc(1500, anim, 1);
+	glutTimerFunc(150, anima, 10);
+	glutDisplayFunc(display);
 	glutMainLoop();
-
 	return(0);
 }
 
-void anim(int value) {
-	int aleatorio = rand() % 179;
-	glRotated(-aleatorio, 0, 0, 1);
 
-	/*if (aleatorio) {
+void anima(int valor) {
 
-	}else if () {
-
-	}else if () {
-
-	}else if() {
-
-	}*/
-
-	if ((tx)>(300) || (tx) < (-300)) {
+	if ((tx) > (120)) {
 		xStep = -xStep;
+		x = 1;
 	}
-	if ((ty)>(150) || (ty) < (-150)) {
+
+	if ((tx) < (-120)) {
+		xStep = -xStep;
+		x = 0;
+	}
+
+	if ((ty) > (10) || (ty) < (-30)) {
 		yStep = -yStep;
 	}
-	tx += xStep;
-	ty += yStep;
 
-	printf("\n Top %.2f \t Bottom %.2f \t Right %.2f \t Left %.2f", ((windowH) / 2), (((windowH) / 2) - 1), ((windowW) / 2), (((windowW) / 2) - 1));
-	printf("\n Step X %.2f Step Y %.2f", xStep, yStep);
-	printf("\n TX %.2f TY %.2f", tx, ty);
+	ty += yStep;
+	tx += xStep;
 
 	glutPostRedisplay();
-	glutTimerFunc(150, anim, 1);
+	glutTimerFunc(95, anima, 1);
 }
 
-void keyboard(unsigned char key, int x, int y) {
-	printf("\n Key %c", key);
-	printf("\n1-Translate X\n2-Translate Y\nEnter: ");
-	printf("\nKey %c", key);
-	printf("\n Mouse position: %d x %d", x, y);
-}
+void aquario() {
+	glTranslatef(0, 60, 0);
+	glRotatef(180, 0, 0, 0);
+	glRotatef(0, 0, 0, 0);
+	glColor3f(0.2, 0.2, 1.0);
+	glBegin(GL_POLYGON);
+	for (int i = 0; i < (circ_pnt / 2); i++) {
+		ang = (2 * PI * i) / circ_pnt;
+		glVertex2f(cos(ang) * raioX, sin(ang) * raioY);
+	}
+	glEnd();
 
-void draw() {
+	glTranslated(tx, (ty + 60), 0);
+	glRotatef(180.0, 0.0, 0.0, 1.0);
+
+	if (x == 1) {
+		glRotatef(180.0, 0.0, 1.0, 0.0);
+	}
 	GLfloat circ_pnt = 600;
-    GLfloat ang, raioX = 25.0f, raioY = 5.0f;
-
-	glLoadIdentity();
-	glTranslatef((windowW) / 2, (windowH) / 2, 0);
-	glTranslatef(tx, ty, 0);
-
-
-	glColor3f(255, 215, 0);
+	GLfloat ang, raioX = 25.0f, raioY = 5.0f;
+	glRotatef(0, 0, 0, 0);
+	glColor3f(r, g, b);
 	glBegin(GL_POLYGON);
 	for (int i = 0; i < circ_pnt; i++) {
 		ang = (2 * PI * i) / circ_pnt;
@@ -94,29 +94,60 @@ void draw() {
 
 
 	glBegin(GL_TRIANGLES);
-	glVertex2f(-25, 0);
-	glVertex2f(-60, 25);
-	glVertex2f(-60, -25);
+	glVertex2f(25, 0);
+	glVertex2f(60, -25);
+	glVertex2f(60, 25);
 	glEnd();
+
+
+}
+
+void keyboard(unsigned char key, int x, int y) {
+	if (key == 'a') {
+		r = 1;
+		g = 0;
+		b = 1;
+	}
+	else if (key == 'd') {
+		r = 1;
+		g = 1;
+		b = 0;
+	}
+	else if (key == 'w') {
+		r = 0;
+		g = 1;
+		b = 1;
+	}
+	else if (key == 's') {
+		r = 1;
+		g = 1;
+		b = 1;
+	}
+
+	glutPostRedisplay();
 }
 
 void display() {
-	glMatrixMode(GL_MODELVIEW);
+
+	glMatrixMode(GL_MODELVIEW); //coordenadas
 	glLoadIdentity();
 
-	glClearColor(0, 0, 1, 1);
+	glClearColor(0.2, 0.5, 0.5, 1.0f);
 	glClear(GL_COLOR_BUFFER_BIT);
 
-	glViewport(0, 0, windowW, windowH);
-	draw();
+	//colocar o desenho no meio da janela:
+	glTranslatef(janela_largura / 2, janela_altura / 2, 0.0f);
+	glViewport(0, 0, janela_largura, janela_altura);
+
+	aquario();
 
 	glFlush();
 }
 
-void screen(GLsizei w, GLsizei h) {
+void tela(GLsizei w, GLsizei h) {
+
 	glMatrixMode(GL_PROJECTION);
 	glLoadIdentity();
-
-	gluOrtho2D(0, windowW, 0, windowH);
+	gluOrtho2D(0, janela_largura, 0, janela_altura);
 	glMatrixMode(GL_MODELVIEW);
 }
